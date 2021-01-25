@@ -4,15 +4,25 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
  
 function App() {
-  const counter = useSelector(state => state);
+  const counter =  useSelector(state => state);
   const cityName = counter.handle.cityN;
-  console.log(counter.weatherhandle);
+  console.log(counter.weatherhandle); //promise obj
 
-  var wdata= counter.weatherhandle
+  const wdata= counter.weatherhandle
 
-  console.log(counter.handle.cityN);
   const dispatch = useDispatch();
 
+
+  const printAddress = () => {
+   const weather= wdata.then((a) => {
+    console.log(a.weatherdata);
+      return a.weatherdata;
+    });
+    console.log("weather data "+weather);
+    return weather;
+  };
+  
+  printAddress();
  
   return (
     <div className="App">
@@ -22,9 +32,7 @@ function App() {
       
       <button type='button' onClick={ ()=> dispatch ( {type: "Submit",payload: cityName}) }>SUBMIT</button>
 
-    
-        
-      
+      <h4>Hey</h4>
     
     </div>
    
