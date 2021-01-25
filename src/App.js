@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
 
+import React from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+ 
 function App() {
+  const counter = useSelector(state => state);
+  const cityName = counter.handle.cityN;
+  console.log(counter.weatherhandle);
+  const dispatch = useDispatch();
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+     
+     
+     
+      <input type='text' placeholder='Please enter city Name' onChange={(event)=> dispatch({type: "City",payload: event.target.value}) }/> <br></br>
+      <input type='text' placeholder='Please enter country Name' onChange={(event)=> dispatch({type: "Country",payload: event.target.value}) }/> <br></br>
+      
+     
+     <button type='button' onClick={ ()=> dispatch ( {type: "Submit",payload: cityName}) }>SUBMIT</button>
+    
+
+   
     </div>
+   
   );
 }
-
+ 
 export default App;
