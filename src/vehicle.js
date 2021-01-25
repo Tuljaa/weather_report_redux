@@ -5,7 +5,7 @@ const vehicle = {
 }
 
 const weatherdata ={
-
+        
 };
 
 const reducer = (initialState={vehicle}, action) => {
@@ -28,30 +28,23 @@ const reducer = (initialState={vehicle}, action) => {
   }
 };
 
-    const  weatherReducer =(initialState1={weatherdata}, action)=>{
+    const  weatherReducer =async (initialState1={weatherdata}, action)=>{
 
         //console.log("In WeatherReducer");
         switch (action.type) {
                 case "Submit":
                     //alert(action.payload);
                     const APIKEY="fbf712a5a83d7305c3cda4ca8fe7ef29";
-
-                    getweatherdata(APIKEY);
-                    
-                    async function getweatherdata (APIKEY){
-
-                        const data= await fetch(` https://api.openweathermap.org/data/2.5/forecast?q=${action.payload}&units=metric&appid=${APIKEY}`)
-                    .then(response=>response.json()).then(weatherdata => (weatherdata));
-
-                    console.log(data.city);
-
+                    const data= await fetch(` https://api.openweathermap.org/data/2.5/forecast?q=${action.payload}&units=metric&appid=${APIKEY}`)
+                    .then(response=>response.json()).then(weatherdata => {return weatherdata.city});
+                    //const weatherfetchdata= await data.json();
+                    //const wdata= await data;
+                   console.log(data);
                    return {
                         ...initialState1,
-                        weatherdata : data.city,
+                        weatherdata : data,
                     }
-                    }
-                break;
-        
+            
             default:
                 return initialState1;
         }
