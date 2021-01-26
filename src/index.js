@@ -2,15 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import rootReducer from "./vehicle.js";
+import rootReducer from "./reducer.js";
 import App from "./App";
+import 'bootstrap/dist/css/bootstrap.min.css';
  
-const vehicle = createStore(rootReducer);
+const reducer = createStore(rootReducer);
  
 const rootElement = document.getElementById("root");
  
 ReactDOM.render(
-  <Provider store={vehicle}>
+  <Provider store={reducer}>
     <App />
   </Provider>,
   rootElement
