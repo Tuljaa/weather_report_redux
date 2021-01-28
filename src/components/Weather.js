@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import cloudy from '../src/resources/images/cloudy.png';
-import day_night from '../src/resources/images/day-and-night.png'
+import cloudy from '../resources/images/cloudy.png';
+import day_night from '../resources/images/day-and-night.png'
 
 const Weather =() => {
 

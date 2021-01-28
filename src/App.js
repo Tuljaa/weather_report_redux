@@ -2,8 +2,8 @@ import { OutlinedInput, InputLabel, Button } from '@material-ui/core';
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import app from './css/App.css'; 
-import Weather from './Weather';
+import './css/App.css'; 
+import Weather from './components/Weather';
 
 const App =() => {
   const counter =  useSelector(state => state);
@@ -19,7 +19,7 @@ const App =() => {
 }  
 
   return (
-    <div className="app bg-info d-inline-block" >
+    <div className="app d-inline-block" >
 
     <h1 className="m-2 text-center">Weather Forecast</h1>
     <hr></hr>
