@@ -10,6 +10,7 @@ const App =() => {
   
   const dispatch = useDispatch();
 
+ console.log(counter.weatherhandle.data);
    const apidata = async (e) => {
 
     const APIKEY="fbf712a5a83d7305c3cda4ca8fe7ef29";
@@ -19,9 +20,8 @@ const App =() => {
 }  
 
   return (
-    <div className="app d-inline-block" >
-
-    <h1 className="m-2 text-center">Weather Forecast</h1>
+    <div className="app" data-test="App">
+    <h1 className="p-3 text-center">Weather Forecast</h1>
     <hr></hr>
         
     <InputLabel className="InputLabel d-inline-block" ><strong>City Name : </strong></InputLabel>
@@ -34,7 +34,7 @@ const App =() => {
     <Button className="d-inline-block m-5" type='button' variant="contained" color="default" onClick={ ()=> apidata() }>SUBMIT</Button>   <hr></hr><br></br>
      
     {
-
+ 
     ( (counter.weatherhandle.data!==undefined) ? 
 
     <Weather/> : null )

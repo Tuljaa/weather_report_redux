@@ -7,6 +7,7 @@ import App from "./App";
 import 'bootstrap/dist/css/bootstrap.min.css';
  
 const reducer = createStore(rootReducer);
+console.log(reducer.getState());
  
 const rootElement = document.getElementById("root");
  
