@@ -1,6 +1,7 @@
 import React from "react";
 import cloudy from '../resources/images/cloudy.png';
 import day_night from '../resources/images/day-and-night.png'
+import WrapperComp from '../components/HOF/WrapperComp'
 
 const Weather = ({data}) => {
 
@@ -35,4 +36,4 @@ const Weather = ({data}) => {
     </div>
 )
 }
-export default Weather
+export default WrapperComp(Weather);

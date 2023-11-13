@@ -1,13 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+
 import {
   weatherActions, 
   selectWeatherData,
   selectIsFetching,
   selectIsFetchFailed,
   selectError,
-  clearErrorMessage
+  clearErrorMessage,
+  selectSearchRes
 } from "../saga+slice+API/weatherData.slice";
+import { useEffect } from "react";
 
 export default function useHomePage({refInput, refClose}) {
     const dispatch = useDispatch();
@@ -15,9 +18,23 @@ export default function useHomePage({refInput, refClose}) {
     const isFetching = useSelector(selectIsFetching);
     const isFetchFailed = useSelector(selectIsFetchFailed);
     const Error = useSelector(selectError)
+
+    const searchRes = useSelector(selectSearchRes)
+
+    const [searchOutcomes, setSearchOutcomes] = useState([]);
+
+    useEffect(() => {
+      setSearchOutcomes(searchRes)
+    }, [searchRes])
+
+    const handleSearchClick = (cityName) => {
+      refInput.current.value=cityName;
+      setSearchOutcomes([]);
+      dispatch(weatherActions.fetchStart(cityName))
+    }
   
     const apidata = (cityName) => {
-      dispatch(weatherActions.fetchStart(cityName))
+      dispatch(weatherActions.fetchSearchResults(cityName))
     }    
 
     const DebounceAPI = async (queryParam) => {
@@ -41,8 +58,8 @@ export default function useHomePage({refInput, refClose}) {
   
     const handleChange = (e) => {
       const ip = e.target.value;
-    //   refClose.current.classList.add('clear-input-button')
-      refClose.current.style.display= 'block';
+      // refClose.current.classList.add('clear-input-button')
+      // refClose.current.style.display= 'block';
       if(ip.length < 3){
         return;
       }
@@ -53,17 +70,18 @@ export default function useHomePage({refInput, refClose}) {
         refClose.current.style.display= 'none';
     }
     const clearError = () => {
-      console.log('Clicked BROO')
       dispatch(clearErrorMessage());
     }
 
     return {
       data,
+      searchOutcomes: searchOutcomes.key,
       isFetching,
       isFetchFailed,
       err: Error,
       clearError,
       handleX,
-      handleChange
+      handleChange,
+      handleSearchClick
     }
 }

@@ -1,38 +1,50 @@
 .app {
   position: relative;
+  height: calc(100vh - 100px);
+  /* overflow: auto; */
+}
+ 
+h3{
   display: inline-flex;
-  width: 100%;
-  height: 100vh;
-  background-color: #025464;
-  color: #E8AA42;
-  font-size: calc(15px + 2vmin);
-} 
-h2{
-  position: inherit;
-  margin-left: 3%;
-  float: left;
+}
+
+.dropdown {
+  position: absolute;
+  margin-top: 2%;
+  padding-left: 25px;
+  font-size: large;
+  width: 20%;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.dropdown > .dropdownContent {
+  padding: 10px;
+  border-bottom: 0.2pt solid black;
+}
+
+.dropdownContent:hover {
+  transform: scale(1.3, 1.3);
+  font-size: larger;
 }
 
 .containerOfInput {
   display: inline-flex;
-  position: relative;
-  left: 55%;
-  height: 5%;
-  top: 4%;
+  margin-left: 5%;
 }
 
 .OutlinedInput::placeholder{
-    color: #E8AA42;
-    font-size: medium;
+   color: #E8AA42;
+   font-size: large;
 }
 .OutlinedInput{
   background-color: transparent;
   border: none;
   outline: none;
-  color: #E8AA42;
-  font-size: large;
+  font-size: xx-large;
   font-weight: bold;
-  border-bottom: 5px solid #E8AA42;
+  color: #E8AA42;
+  border-bottom: 3px solid #E8AA42;
 }
 
 [type="search"]::-webkit-search-cancel-button {
@@ -52,10 +64,11 @@ h2{
 .flip-card {
   position: relative;
   text-align: center;
-  width: 500px;
-  height: 500px;
-  top: 25%;
-  right: 10%;
+  width: 400px;
+  height: 400px;
+  top: 20%;
+  right: 35%;
+  left: 35%;
   background-color: transparent;
 }
 

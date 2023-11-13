@@ -1,0 +1,28 @@
+.TabContainer {
+    display: inline-flex;
+    position: relative;
+    top: 70%;
+    height: calc(100vh - 100px); /* Dynamic */
+    width: 100%;
+}
+
+.tabPanes {
+    padding: 10%;
+    cursor: pointer;
+}
+
+.borderBottomLine {
+    padding-top: 5%;
+    border-bottom: 3px solid rgb(0, 0, 0);
+}
+
+.disableTab {
+    opacity: 0.2; /* You can adjust the opacity to make it more or less transparent */
+}
+
+.graphContainer {
+  position: absolute;
+  top: 35%;
+  height: 100%;
+  width: 80%;
+} 

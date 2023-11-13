@@ -1,15 +1,15 @@
 import React from "react";
 import HomePage from "./components/HomePage";
 import './css/App.css'; 
-import WrapperComp from "./components/HOF/WrapperComp";
+import Tabs from "./components/Tabs/Tabs";
 
 const App =() => {
 
   return (
     <div className="app" data-test="App" >
-      <h2>Weather Forecast</h2>
+      <h3>Weather Forecast</h3>
         <HomePage />
-        {/* <WrapperComp /> props to this will get passed to wrapperComponent */}
+        <Tabs />
     </div>
   );
 }
