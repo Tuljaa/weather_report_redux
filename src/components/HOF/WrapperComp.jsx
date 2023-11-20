@@ -3,7 +3,7 @@ import Spinner from './Spinner'
 
 const WrapperComp = (CommonLogic) => {
   return function ({data, isFetching}){
-console.log(data, isFetching)
+
     if (isFetching) {
       return <Spinner />
     }

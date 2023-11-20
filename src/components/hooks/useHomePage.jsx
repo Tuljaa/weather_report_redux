@@ -27,10 +27,10 @@ export default function useHomePage({refInput, refClose}) {
       setSearchOutcomes(searchRes)
     }, [searchRes])
 
-    const handleSearchClick = (cityName) => {
-      refInput.current.value=cityName;
+    const handleSearchClick = (selectedCity) => {
+      refInput.current.value = selectedCity.split(',')[0];
       setSearchOutcomes([]);
-      dispatch(weatherActions.fetchStart(cityName))
+      dispatch(weatherActions.fetchStart(selectedCity))
     }
   
     const apidata = (cityName) => {
@@ -54,7 +54,7 @@ export default function useHomePage({refInput, refClose}) {
       }
     }
   
-    const debounceBoundTimer = debounce(DebounceAPI, 5000)
+    const debounceBoundTimer = debounce(DebounceAPI, 3000)
   
     const handleChange = (e) => {
       const ip = e.target.value;
@@ -75,7 +75,7 @@ export default function useHomePage({refInput, refClose}) {
 
     return {
       data,
-      searchOutcomes: searchOutcomes.key,
+      searchOutcomes,
       isFetching,
       isFetchFailed,
       err: Error,

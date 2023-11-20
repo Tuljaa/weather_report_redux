@@ -1,6 +1,8 @@
 import { createModule } from "saga-slice"
 import { pipe, prop, map } from 'ramda';
 
+import { returnKey } from "../UtilityFunctions";
+
 const name = 'weatherData'
 const initialState = {
     isFetching: false,
@@ -9,8 +11,7 @@ const initialState = {
     isFetchFailed: false,
     timelyData: {},
     searchRes:{
-        key:[],
-        entity:{}
+        cityData : []
     }
 }
 
@@ -26,7 +27,7 @@ export const weatherDataSlice = createModule({
             state.data = payload;
         },
         fetchSearchResults: (state, payload) => {
-            state.searchRes.entity = {}
+            state.searchRes.cityData = []
         },
         updateTimelyData: (state, payload) => {
             const {
@@ -45,17 +46,19 @@ export const weatherDataSlice = createModule({
             console.log(state.timelyData)
         },
         updateSearchRes: (state, payload) => {
-            state.searchRes.key = [ ...new Set(
-                map(({ name }) => (
-                    name
-                ), payload)
-            ) ]
-
-            state.searchRes.entity = map(({ name, lat, lon, state }) => ({
-                [ name ] : {
-                    name, lat, lon, state
-                }
-            }), payload);
+            // state.searchRes.cityData = payload.reduce( (acc, { name, lat, lon, state }) => {
+                
+            //     acc.set(returnKey(name, state), {
+            //         lat, lon, name, state
+            //     })
+            //     return acc;
+            // }, new Map());
+            state.searchRes.cityData = payload.reduce( (acc, { name, lat, lon, state }) => {                
+                    acc[returnKey(name, state)] = {
+                        lat, lon, name, state
+                    }
+                    return acc;
+                }, []);
         },
         fetchFailed: (state, payload) => {
             state.isFetching = false;
@@ -74,7 +77,10 @@ export const selectIsFetching = pipe(selectSlice, prop('isFetching'));
 export const selectError = pipe(selectSlice, prop('error'));
 export const selectIsFetchFailed = pipe(selectSlice, prop('isFetchFailed'));
 
-export const selectSearchRes = pipe(selectSlice, prop('searchRes'));
+export const selectSearchRes = pipe(selectSlice, prop('searchRes'), prop('cityData'));
+
+export const getCityCordinates = (cityName) => (store) => pipe(selectSearchRes)(store)[cityName];
+
 
 export const {
     fetchStart,

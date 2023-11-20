@@ -2,7 +2,7 @@ import React from 'react'
 import TemperatureTab from './TemperatureTab'
 import PercipitationTab from './PercipitationTab'
 import WindTab from './WindTab'
-import './Tabs.css';
+import '../../css/Tabs.css';
 import useTabs from './hooks/useTabs'
 
 export default function Tabs() { 

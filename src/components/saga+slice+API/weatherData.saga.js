@@ -1,16 +1,18 @@
-import { put, takeLatest, call } from "redux-saga/effects";
+import { put, takeLatest, call, select } from "redux-saga/effects";
 import {
     fetchSuccess,
     fetchFailed,
     weatherActions,
     updateTimelyData,
-    updateSearchRes
+    updateSearchRes,
+    getCityCordinates
 } from "./weatherData.slice";
 import { getWeatherData, getCoordinates } from "./weatherAPI";
 
 function *fetchWeatherDataSaga({payload}) {
     try {
-        const response = yield call(getWeatherData, payload);
+        const cityLocDetails = yield select(getCityCordinates(payload));
+        const response = yield call(getWeatherData, cityLocDetails);
         const {
             list
         } = response.data;
