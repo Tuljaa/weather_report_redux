@@ -1,37 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 
 import {
   weatherActions, 
   selectWeatherData,
   selectIsFetching,
-  selectIsFetchFailed,
   selectError,
   clearErrorMessage,
-  selectSearchRes
 } from "../saga+slice+API/weatherData.slice";
-import { useEffect } from "react";
 
-export default function useHomePage({refInput, refClose}) {
+export default function useHomePage() {
     const dispatch = useDispatch();
     const data =  useSelector(selectWeatherData);
     const isFetching = useSelector(selectIsFetching);
-    const isFetchFailed = useSelector(selectIsFetchFailed);
     const Error = useSelector(selectError)
-
-    const searchRes = useSelector(selectSearchRes)
-
-    const [searchOutcomes, setSearchOutcomes] = useState([]);
-
-    useEffect(() => {
-      setSearchOutcomes(searchRes)
-    }, [searchRes])
-
-    const handleSearchClick = (selectedCity) => {
-      refInput.current.value = selectedCity.split(',')[0];
-      setSearchOutcomes([]);
-      dispatch(weatherActions.fetchStart(selectedCity))
-    }
   
     const apidata = (cityName) => {
       dispatch(weatherActions.fetchSearchResults(cityName))
@@ -54,34 +35,18 @@ export default function useHomePage({refInput, refClose}) {
       }
     }
   
-    const debounceBoundTimer = debounce(DebounceAPI, 3000)
-  
-    const handleChange = (e) => {
-      const ip = e.target.value;
-      // refClose.current.classList.add('clear-input-button')
-      // refClose.current.style.display= 'block';
-      if(ip.length < 3){
-        return;
-      }
-      debounceBoundTimer(ip);
-    }
-    const handleX = () => {
-        refInput.current.value=''
-        refClose.current.style.display= 'none';
-    }
+    const wrapperOnChange = debounce(DebounceAPI, 3000)
+
     const clearError = () => {
       dispatch(clearErrorMessage());
     }
 
     return {
       data,
-      searchOutcomes,
       isFetching,
-      isFetchFailed,
       err: Error,
+
       clearError,
-      handleX,
-      handleChange,
-      handleSearchClick
+      wrapperOnChange,
     }
 }

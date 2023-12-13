@@ -10,6 +10,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useSelector } from 'react-redux';
+
+import { selectWeatherReport } from '../saga+slice+API/weatherData.slice';
 
 ChartJS.register(
   CategoryScale,
@@ -21,8 +24,8 @@ ChartJS.register(
   Legend
 );
 
-ChartJS.defaults.borderColor='transparent'
-ChartJS.defaults.color='black'
+// ChartJS.defaults.borderColor='#4B527E'
+ChartJS.defaults.color='#4B527E'
 
 export const options = {
   responsive: true,
@@ -30,21 +33,32 @@ export const options = {
 
     title: {
       display: true,
-      color: 'black',
-      text: 'Chart.js Line Chart',
+      color: '#4B527E',
+      text: '',
     },
   },
 };
 
-export default function GraphComp() {
+export default function GraphComp({ tabSelected }) {
+  const weatherData = useSelector(selectWeatherReport)
+
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'January', 'February', 'March', 'April', 'January', 'February', 'March', 'April'],
+    labels: (Object.keys(weatherData).map( ( value ) => {
+      if (parseInt(value.split(':')[0]) > 0 && parseInt(value.split(':')[0]) < 12) {
+        return parseInt(value.split(':')[0]).toString().concat(' am')
+      }
+      return parseInt(value.split(':')[0]).toString().concat(' pm')
+    } )),
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [2,4,8,2,4,6,7,2,4,8,2,4,6,7,2,4,8,2,4,6,7,2,4,8,2,4,6,7,2,4,8,2,4,6,7],
-        borderColor: '#E8AA42',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        label: (tabSelected === 'temperature') ? 'TEMPERATURE' : 'WIND',
+        data: Object.values(weatherData).map( ({ temp, speed }) => {
+          if ( tabSelected === 'temperature' ) return temp
+          else if ( tabSelected === 'wind' ) return speed
+          return null
+        } ),
+        borderColor: '#4B527E',
+        backgroundColor: '#4B527E',
       },
     ],
   }

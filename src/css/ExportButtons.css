@@ -1,0 +1,25 @@
+.buttonContainer {
+    display: inline-flex;
+    position: relative;
+    top: 40%;
+    margin-bottom: 35%;
+    left: 20%;
+    font-size: large;
+}
+.buttonContainer > button {
+    padding: 1%;
+    margin-left: 15%;
+    font-size: calc(10px + 2vmin);
+    cursor: pointer;
+    width: 50vh;
+    height: 10vh;
+    color: #E5C3A6;
+    border: 1px solid #E5C3A6;
+    border-radius: 5%;
+    background-color: transparent;
+}
+
+button:hover {
+    transition: transform 0.5s;
+    transform: scale(0.8,0.8);
+}

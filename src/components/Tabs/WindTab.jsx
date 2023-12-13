@@ -8,7 +8,7 @@ export default function WindTab({isEnabled}) {
         Wind 
         <div className='borderBottomLine'></div>
       </div>
-      {/* <GraphComp data='From TemperatureTab'/> */}
+      { isEnabled && <GraphComp tabSelected='wind' /> }
     </div>
   )
 }

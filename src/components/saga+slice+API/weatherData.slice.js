@@ -1,7 +1,13 @@
 import { createModule } from "saga-slice"
-import { pipe, prop, map } from 'ramda';
+import { pipe, prop } from 'ramda';
 
 import { returnKey } from "../UtilityFunctions";
+
+export const states = {
+    'idel': 'idel',
+    'retrieving': 'retrieving',
+    'noData': 'noData',
+}
 
 const name = 'weatherData'
 const initialState = {
@@ -10,7 +16,7 @@ const initialState = {
     error: null,
     isFetchFailed: false,
     timelyData: {},
-    searchRes:{
+    searchRes: {
         cityData : []
     }
 }
@@ -32,33 +38,23 @@ export const weatherDataSlice = createModule({
         updateTimelyData: (state, payload) => {
             const {
                 list,
-            } = payload;
+            } = payload; 
 
-            state.timelyData = map(({ main:{temp}, wind: {speed}, rain, dt_txt }) => {
-                console.log(temp,speed,rain, dt_txt.slice(12), dt_txt);
-                
-                    // [dt_txt.slice(12)]: {
-                    //     temp,
-                    //     speed
-                    // }
-                
-            }, list )
-            console.log(state.timelyData)
+            state.timelyData = list.reduce( (acc, { main:{temp}, wind: {speed}, dt_txt }) => {                
+                   acc[dt_txt.split(' ')[1]] = {
+                        temp,
+                        speed
+                    }
+                    return acc;
+            }, [])
         },
         updateSearchRes: (state, payload) => {
-            // state.searchRes.cityData = payload.reduce( (acc, { name, lat, lon, state }) => {
-                
-            //     acc.set(returnKey(name, state), {
-            //         lat, lon, name, state
-            //     })
-            //     return acc;
-            // }, new Map());
-            state.searchRes.cityData = payload.reduce( (acc, { name, lat, lon, state }) => {                
+            state.searchRes.cityData = payload.reduce( (acc, { name, lat, lon, state }) => {            
                     acc[returnKey(name, state)] = {
                         lat, lon, name, state
                     }
                     return acc;
-                }, []);
+                }, {});
         },
         fetchFailed: (state, payload) => {
             state.isFetching = false;
@@ -67,7 +63,8 @@ export const weatherDataSlice = createModule({
         },
         clearErrorMessage: (state) => {
             state.error = null;
-        }
+        },
+        resetState: () => initialState
     }
 })
 
@@ -81,6 +78,8 @@ export const selectSearchRes = pipe(selectSlice, prop('searchRes'), prop('cityDa
 
 export const getCityCordinates = (cityName) => (store) => pipe(selectSearchRes)(store)[cityName];
 
+export const selectWeatherReport = pipe(selectSlice, prop('timelyData'));
+
 
 export const {
     fetchStart,
@@ -90,6 +89,8 @@ export const {
     clearErrorMessage,
     updateSearchRes,
     fetchSearchResults,
+
+    resetState,
 } = weatherDataSlice.actions
 
 export const weatherActions = weatherDataSlice.actions;

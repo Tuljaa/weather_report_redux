@@ -1,9 +1,9 @@
 .TabContainer {
-    display: inline-flex;
     position: relative;
-    top: 70%;
-    height: calc(100vh - 100px); /* Dynamic */
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .tabPanes {
@@ -13,7 +13,7 @@
 
 .borderBottomLine {
     padding-top: 5%;
-    border-bottom: 3px solid rgb(0, 0, 0);
+    border-bottom: 3px solid #E5C3A6;
 }
 
 .disableTab {
@@ -21,8 +21,11 @@
 }
 
 .graphContainer {
-  position: absolute;
-  top: 35%;
-  height: 100%;
-  width: 80%;
+    position: absolute;
+    display: block;
+    top: 60%;
+    left: 18vh;
+    height: fit-content;
+    width: 80%;
+    background-color: #E5C3A6;
 } 

@@ -26,7 +26,9 @@ function *fetchWeatherDataSaga({payload}) {
 function *fetchSearchResultsSaga({payload}) {
     try{
         const response = yield call(getCoordinates, payload);
-        yield put(updateSearchRes(response.data));
+        if (response.data.length !== 0) {
+            yield put(updateSearchRes(response.data));
+        }
     } catch (err) {
         yield put(fetchFailed(err.message));
     }

@@ -4,9 +4,6 @@ import day_night from '../resources/images/day-and-night.png'
 import WrapperComp from '../components/HOF/WrapperComp'
 
 const Weather = ({data}) => {
-
-    console.log(data)
-
     var stylesImg = {
         margin: '10px',
         width: '40px',
