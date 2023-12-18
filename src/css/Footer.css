@@ -1,12 +1,12 @@
-.divLine {
-    color: #E5C3A6;
-}
 .footerContainer {
-    display: block;
+    display: inline-block;
     text-align: center;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    height: 8%;
+    color: #E5C3A6;
+    font-size: smaller;
     background-color: #2E4374;
 }

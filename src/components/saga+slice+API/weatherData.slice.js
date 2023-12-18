@@ -12,13 +12,16 @@ export const states = {
 const name = 'weatherData'
 const initialState = {
     isFetching: false,
-    data: null,
-    error: null,
+    isDownloading: false,
     isFetchFailed: false,
+    data: null,
     timelyData: {},
     searchRes: {
         cityData : []
-    }
+    },
+    citySelected: '',
+    error: null,
+    downloadError: null,
 }
 
 export const weatherDataSlice = createModule({
@@ -34,6 +37,9 @@ export const weatherDataSlice = createModule({
         },
         fetchSearchResults: (state, payload) => {
             state.searchRes.cityData = []
+        },
+        updateSelectedCity: (state,payload) => {
+            state.citySelected = payload;
         },
         updateTimelyData: (state, payload) => {
             const {
@@ -61,6 +67,16 @@ export const weatherDataSlice = createModule({
             state.isFetchFailed = true;
             state.error = payload;
         },
+
+        downloadStart: (state) => {
+            state.isDownloading = true;
+            state.downloadError = null
+        },
+        downloadFailed: (state, payload) => {
+            state.isDownloading = false;
+            state.downloadError = payload
+        },
+
         clearErrorMessage: (state) => {
             state.error = null;
         },
@@ -71,10 +87,13 @@ export const weatherDataSlice = createModule({
 const selectSlice = pipe(prop(weatherDataSlice.name));
 export const selectWeatherData = pipe(selectSlice, prop('data')); 
 export const selectIsFetching = pipe(selectSlice, prop('isFetching'));
+export const selectIsDownloading = pipe(selectSlice, prop('isDownloading'));
 export const selectError = pipe(selectSlice, prop('error'));
+export const selectDownloadErr = pipe(selectSlice, prop('downloadError'));
 export const selectIsFetchFailed = pipe(selectSlice, prop('isFetchFailed'));
 
 export const selectSearchRes = pipe(selectSlice, prop('searchRes'), prop('cityData'));
+export const selectedCity = pipe(selectSlice, prop('citySelected'));
 
 export const getCityCordinates = (cityName) => (store) => pipe(selectSearchRes)(store)[cityName];
 
@@ -86,9 +105,13 @@ export const {
     fetchSuccess,
     fetchFailed,
     updateTimelyData,
+    updateSelectedCity,
     clearErrorMessage,
     updateSearchRes,
     fetchSearchResults,
+
+    downloadStart,
+    downloadFailed,
 
     resetState,
 } = weatherDataSlice.actions

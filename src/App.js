@@ -7,7 +7,7 @@ const App =() => {
   return (
     <div className="app" data-test="App" >
       <body>
-        <h2>Weather Forecast</h2>
+        <h3 className="brandLogo">Weather Forecast</h3>
         <HomePage />
       </body>
         <footer>

@@ -31,6 +31,7 @@ export default function useSearchComponent({ refInput, refClose, wrapperOnChange
         refInput.current.value = selectedCity.split(',')[0];
         setSearchOutcomes([]);
         dispatch(weatherActions.fetchStart(selectedCity))
+        dispatch(weatherActions.updateSelectedCity(selectedCity))
       }
       
     const handleX = () => {

@@ -5,9 +5,10 @@ import {
     weatherActions,
     updateTimelyData,
     updateSearchRes,
-    getCityCordinates
+    getCityCordinates,
+    downloadFailed
 } from "./weatherData.slice";
-import { getWeatherData, getCoordinates } from "./weatherAPI";
+import { getWeatherData, getCoordinates, downloadWeatherReports } from "./weatherAPI";
 
 function *fetchWeatherDataSaga({payload}) {
     try {
@@ -34,6 +35,36 @@ function *fetchSearchResultsSaga({payload}) {
     }
 }
 
+function *downloadReportsSaga({payload}) {
+    const{
+        cityName,
+    } = payload;
+
+    try{
+        const cityLocDetails = yield select(getCityCordinates(cityName));
+        const response = yield call(downloadWeatherReports, {cityLocDetails});
+        const {
+            list
+        } = response.data;
+
+        if (list.length !== 0) {
+            const blobObj = new Blob([ JSON.stringify(list) ], { type: 'application/json' });
+            const downloadURL = window.URL.createObjectURL(blobObj);
+            console.log('blobObj', downloadURL)
+            const aElement = document.createElement('a');
+            aElement.href = downloadURL;
+            aElement.download = `${cityName}.json`;
+            document.body.appendChild(aElement);
+            aElement.click();
+
+            document.body.removeChild(aElement);
+            window.URL.revokeObjectURL(downloadURL);
+        }
+    } catch (err) {
+        yield put(downloadFailed(err.message));
+    }
+}
+
 // Define a watcher function to watch for a specific action type
 export default function* weatherDataWatcher() {
     yield takeLatest(
@@ -41,5 +72,8 @@ export default function* weatherDataWatcher() {
     );
     yield takeLatest(
         weatherActions.fetchSearchResults, fetchSearchResultsSaga,
+    );
+    yield takeLatest(
+        weatherActions.downloadStart, downloadReportsSaga,
     );
 }

@@ -5,8 +5,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #E8AA42; 
+    border: 16px solid rgba(214, 206, 206, 0.715);
+    border-top: 16px solid #2E4374; 
     border-radius: 50%;
 
     width: 80px;
