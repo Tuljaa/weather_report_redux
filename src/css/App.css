@@ -68,42 +68,5 @@
   }
 } */
 
-.flip-card {
-  position: relative;
-  text-align: center;
-  width: 500px;
-  height: 500px;
-  top: 20%;
-  right: 35%;
-  left: 35%;
-  background-color: #E5C3A6;
-  color: #4B527E;
-}
-
-.flip-card-inner {
-  width: 500px;
-  height: 500px;
-  text-align: center;
-  transition: transform 2s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
-}
-
 
 

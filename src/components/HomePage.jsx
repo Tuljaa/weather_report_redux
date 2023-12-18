@@ -5,7 +5,6 @@ import useHomePage from './hooks/useHomePage';
 import ErrorFunc from "./ErrorComp/ErrorFunc";
 import Tabs from "./Tabs/Tabs";
 import SearchComponent from './SearchComponent';
-import ExportButtons from "../components/ExportButtons";
 
 const HomePage = () => {
     const {
@@ -27,7 +26,6 @@ const HomePage = () => {
         {
           data && <>
             <Tabs /> 
-            <ExportButtons/>
           </>
         }
     </>
