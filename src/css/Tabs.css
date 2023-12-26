@@ -1,31 +1,34 @@
 .TabContainer {
     position: relative;
     display: flex;
-    justify-content: center;
+    top: 10%;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    height: 120vh;
 }
-
-.tabPanes {
-    padding: 10%;
-    cursor: pointer;
-}
-
-.borderBottomLine {
-    padding-top: 5%;
-    border-bottom: 3px solid #2E4374;
-}
-
-.disableTab {
-    opacity: 0.2; /* You can adjust the opacity to make it more or less transparent */
-}
-
 .graphContainer {
     position: absolute;
-    display: block;
-    top: 60%;
+    top: 20%;
     left: 18vh;
     height: fit-content;
     width: 80%;
     background-color: #E5C3A6;
+}
+.tempText, .tempWind {
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+    top: 3%;
+    left: 30%;
+    padding: 1%;
+    cursor: pointer;
+    font-size: larger;
+    font-weight: bold;
+    border-bottom: 3px solid #2E4374;
 } 
+.tempWind {
+    left: 60%;
+}
+.disableTab {
+    opacity: 0.2; /* You can adjust the opacity to make it more or less transparent */
+}

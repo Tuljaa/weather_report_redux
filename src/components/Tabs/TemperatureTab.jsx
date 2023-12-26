@@ -3,12 +3,11 @@ import GraphComp from './GraphComp'
 
 export default function TemperatureTab({isEnabled}) {
   return (
-    <div className='tabPanes'>
-      <div className={isEnabled ? '' : 'disableTab'} id='Temperature'> 
-        Temperature
+    <>
+      <div className={isEnabled ? '': 'disableTab'}> 
+        <p className='tempText' id='Temperature'>Temperature</p>
       </div>
-      <div className='borderBottomLine'></div>
       { isEnabled && <GraphComp tabSelected='temperature' /> }
-    </div>
+    </>
   )
 }

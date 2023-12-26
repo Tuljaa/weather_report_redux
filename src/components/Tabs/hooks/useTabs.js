@@ -4,7 +4,9 @@ export default function useTabs() {
     const [tabKey, setTabKey] = useState('Temperature')
 
     const handleClick = (event) => {
-        setTabKey(event.target.id)
+        if (event.target.id) {
+          setTabKey(event.target.id)
+        }
     };
 
   return {

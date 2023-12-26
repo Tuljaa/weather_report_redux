@@ -24,7 +24,6 @@ ChartJS.register(
   Legend
 );
 
-// ChartJS.defaults.borderColor='#4B527E'
 ChartJS.defaults.color='#4B527E'
 
 export const options = {
@@ -51,7 +50,7 @@ export default function GraphComp({ tabSelected }) {
     } )),
     datasets: [
       {
-        label: (tabSelected === 'temperature') ? 'TEMPERATURE' : 'WIND',
+        label: (tabSelected === 'temperature') ? 'TEMPERATURE in Celsius' : 'WIND in meter/sec',
         data: Object.values(weatherData).map( ({ temp, speed }) => {
           if ( tabSelected === 'temperature' ) return temp
           else if ( tabSelected === 'wind' ) return speed

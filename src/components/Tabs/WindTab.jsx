@@ -3,12 +3,11 @@ import GraphComp from './GraphComp'
 
 export default function WindTab({isEnabled}) {
   return (
-    <div className='tabPanes'>
-      <div className={isEnabled ? '' : 'disableTab'} id='Wind'> 
-        Wind 
-        <div className='borderBottomLine'></div>
+    <>
+      <div className={isEnabled ? '': 'disableTab'}> 
+        <p className='tempWind' id='Wind'>Wind</p>
       </div>
       { isEnabled && <GraphComp tabSelected='wind' /> }
-    </div>
+    </>
   )
 }
