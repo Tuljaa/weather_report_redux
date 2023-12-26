@@ -9,7 +9,7 @@ export async function getWeatherData({lat, lon}) {
 }
 
 export async function getCoordinates(cityName) {
-    const Url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${APIKEY}`
+    const Url = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${APIKEY}`
     const response = await axios.get(Url)
     return response;
 }
