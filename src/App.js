@@ -6,13 +6,15 @@ const App =() => {
 
   return (
     <div className="app" data-test="App" >
-      <body>
+      <header>
         <h3 className="brandLogo">Weather Forecast</h3>
+      </header>
+      <body>
         <HomePage />
       </body>
-        <footer>
-          <Footer/>
-        </footer>
+      <footer>
+        <Footer/>
+       </footer>
     </div>
   );
 }

@@ -24,9 +24,7 @@ const HomePage = () => {
         { err ? <ErrorFunc error={err} clearError={clearError}/> : null}
         <Weather data={data?.main} isFetching={isFetching}/>
         {
-          data && <>
-            <Tabs /> 
-          </>
+          data && <Tabs />
         }
     </>
   )

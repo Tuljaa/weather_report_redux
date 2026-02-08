@@ -1,6 +1,12 @@
 .app {
-  position: relative;
-  height: calc(100vh - 100px);
+  position: absolute;
+  display: flex;
+  /* height: calc(100vh - 100px); */
+  width: 100%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   /* overflow: auto; */
 }
  
@@ -31,7 +37,6 @@
 
 .containerOfInput {
   display: inline-flex;
-  margin-left: 38%;
 }
 
 .OutlinedInput::placeholder{
@@ -62,11 +67,10 @@
   color: #2E4374;
 }
 
-/* @media screen and (min-width: 48px) {
-  body {
-    background-color: lightgreen;
-  }
-} */
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+  /* Styles for screens between 600 and 1024 pixels wide */
+ 
+}
 
 
 

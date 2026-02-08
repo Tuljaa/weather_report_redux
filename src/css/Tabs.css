@@ -1,13 +1,10 @@
 .TabContainer {
-    position: relative;
-    display: flex;
+    /* position: relative; */
     top: 10%;
-    align-items: center;
-    justify-content: center;
     height: 120vh;
 }
 .graphContainer {
-    position: absolute;
+    /* position: absolute; */
     top: 20%;
     left: 18vh;
     height: fit-content;
@@ -15,7 +12,7 @@
     background-color: #E5C3A6;
 }
 .tempText, .tempWind {
-    position: absolute;
+    /* position: absolute; */
     justify-self: center;
     align-self: center;
     top: 3%;
@@ -31,4 +28,10 @@
 }
 .disableTab {
     opacity: 0.2; /* You can adjust the opacity to make it more or less transparent */
+}
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+    /* Styles for screens between 600 and 1024 pixels wide */
+    .graphContainer{
+        left: 1vh;
+    }
 }
